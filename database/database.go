@@ -18,19 +18,19 @@ var (
 )
 
 type User struct {
-	Email                      string `gorm:"primaryKey"`
-	Name                       string
-	City                       string
-	PhoneNumber                string
-	Password                   string
-	PostCode                   uint
-	SchoolId                   string
-	FieldOfStudyId             string
-	DoesNotLiveInDenmark       bool
-	NoLongerAttendingTheCourse bool
-	TermsAccepted              bool
-	Updated                    int64 `gorm:"autoUpdateTime" json:"updated_at"`
-	Created                    int64 `gorm:"autoCreateTime" json:"created_at"`
+	Email                      string `gorm:"primaryKey" json:"email"`
+	Name                       string `json:"name"`
+	City                       string `json:"city"`
+	PhoneNumber                string `json:"phonenumber"`
+	Password                   string `json:"password"`
+	PostCode                   uint   `json:"posctode"`
+	SchoolId                   string `json:"schoolid"`
+	FieldOfStudyId             string `json:"fieldofstudyid"`
+	DoesNotLiveInDenmark       bool   `json:"doesnotliveindenmark"`
+	NoLongerAttendingTheCourse bool   `json:"nolongerattendingthecourse"`
+	TermsAccepted              bool   `json:"termsaccepted"`
+	Updated                    int64  `gorm:"autoUpdateTime" json:"updated_at"`
+	Created                    int64  `gorm:"autoCreateTime" json:"created_at"`
 }
 
 type UserDatabase struct {
