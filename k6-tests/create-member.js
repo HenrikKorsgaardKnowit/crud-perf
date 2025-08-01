@@ -2,12 +2,12 @@
 import { check, sleep } from 'k6';
 
 // Lock request time out period exceeded
-const virtualUsersCount = 50;
+const virtualUsersCount = 100;
 
 export const options = {
     vus: virtualUsersCount,
-    iterations: 1000,
-};
+    iterations: 1000000,
+}
 
 function generateShortHash() {
     //return 21;
@@ -43,15 +43,10 @@ export default function () {
         },
     });
 
-    /*
-    check(res, {
-        'status is 302 (redirect)': (r) => r.status === 302,
-    });*/ 
-
     check(res, {
         'status is 201 (created)': (r) => r.status === 201
     })
 
     console.log(`Created: ${email} | Status: ${res.status}`);
-    sleep(0.1);
+    //sleep(0.1);
 }

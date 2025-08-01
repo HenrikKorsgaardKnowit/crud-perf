@@ -38,10 +38,18 @@ type UserDatabase struct {
 }
 
 func New(host string) *UserDatabase {
-	db, err := gorm.Open(sqlite.Open(host), &gorm.Config{Logger: logger.Default.LogMode((logger.Warn))})
+
+	db, err := gorm.Open(sqlite.Open(host), &gorm.Config{Logger: logger.Default.LogMode((logger.Error))})
 	if err != nil {
 		panic(errors.Join(ErrDatabaseConnection, err))
 	}
+
+	sqlDB, err := db.DB()
+	if err != nil {
+		panic(errors.Join(ErrDatabaseConnection, err))
+	}
+
+	sqlDB.SetMaxOpenConns(1000)
 
 	db.AutoMigrate(&User{})
 	return &UserDatabase{
